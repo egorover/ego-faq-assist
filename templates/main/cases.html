@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Кейсы — Ego Promptfolio{% endblock %}
+{% block content %}
+<section class="page-header py-5 bg-light">
+  <div class="container animate-fade-in">
+    <h1 class="fw-bold">Наши кейсы</h1>
+    <p class="text-secondary mb-0">Реальные задачи, архитектура и измеримый результат.</p>
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      {% for case in cases %}
+      <div class="col-md-6 col-lg-4">
+        <article class="card case-card h-100 border-0 shadow-sm hover-lift">
+          <img src="{{ url_for('static', filename='images/' + case.image) }}" class="card-img-top case-img" alt="{{ case.title }}">
+          <div class="card-body d-flex flex-column">
+            <h2 class="h5 card-title">{{ case.title }}</h2>
+            <p class="card-text text-secondary flex-grow-1">{{ case.short }}</p>
+            <a href="{{ url_for('main.case_detail', slug=case.slug) }}" class="btn btn-primary align-self-start">Подробнее</a>
+          </div>
+        </article>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

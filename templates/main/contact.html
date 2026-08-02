@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Контакты — Ego Promptfolio{% endblock %}
+{% block content %}
+<section class="page-header py-5 bg-light">
+  <div class="container animate-fade-in">
+    <h1 class="fw-bold">Обратная связь</h1>
+    <p class="text-secondary mb-0">Опишите задачу — мы ответим в ближайшее время.</p>
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <div class="card border-0 shadow-sm p-4 p-md-5 animate-fade-in">
+          <form method="post" action="{{ url_for('main.contact') }}" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+              {{ form.name.label(class="form-label") }}
+              {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else ""), placeholder="Ваше имя") }}
+              {% for error in form.name.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+            </div>
+            <div class="mb-3">
+              {{ form.email.label(class="form-label") }}
+              {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), placeholder="you@example.com") }}
+              {% for error in form.email.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+            </div>
+            <div class="mb-3">
+              {{ form.phone.label(class="form-label") }}
+              {{ form.phone(class="form-control" + (" is-invalid" if form.phone.errors else ""), placeholder="+7 (999) 123-45-67") }}
+              {% for error in form.phone.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+            </div>
+            <div class="mb-4">
+              {{ form.subject.label(class="form-label") }}
+              {{ form.subject(class="form-control" + (" is-invalid" if form.subject.errors else ""), rows="4", placeholder="Кратко опишите задачу или вопрос") }}
+              {% for error in form.subject.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-100 hover-lift">Отправить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
