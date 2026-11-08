@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7fb">
+    <title>EgoFAQ Assist — демонстрация</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="EgoFAQ Assist">
+          <span class="brand-mark">E</span>
+          <span>EgoFAQ <span class="brand-light">Assist</span></span>
+        </a>
+        <span class="demo-label">ДЕМО · ВЫМЫШЛЕННАЯ БАЗА</span>
+      </header>
+      <section class="intro">
+        <p class="eyebrow">ВАША БАЗА ЗНАНИЙ, ВСЕГДА НА СВЯЗИ</p>
+        <h1>Чем можем помочь?</h1>
+        <p>Задайте вопрос — ассистент ответит по материалам базы знаний и укажет источники.</p>
+      </section>
+      <section class="chat-card" aria-label="Чат с ассистентом">
+        <div class="chat-head">
+          <div class="avatar">E</div>
+          <div class="assistant-meta"><strong>FAQ-ассистент</strong><span><i></i> Онлайн</span></div>
+          <button id="new-chat" class="icon-button" type="button" aria-label="Начать новый диалог" title="Новый диалог">↻</button>
+        </div>
+        <div id="messages" class="messages" aria-live="polite">
+          <article class="message assistant-message">
+            <div class="bubble">Здравствуйте! Я отвечаю на вопросы по демонстрационной базе знаний. Чем могу помочь?</div>
+          </article>
+        </div>
+        <form id="chat-form" class="composer">
+          <label class="sr-only" for="message-input">Ваш вопрос</label>
+          <textarea id="message-input" rows="1" maxlength="4000" placeholder="Напишите ваш вопрос..." required></textarea>
+          <button id="send-button" class="send-button" type="submit" aria-label="Отправить">↑</button>
+          <p class="composer-note">Ответы формируются по базе знаний и могут быть неполными.</p>
+        </form>
+      </section>
+      <footer>Демонстрационный проект EgoFAQ Assist</footer>
+    </main>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
