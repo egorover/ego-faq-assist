@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}FAQ-ассистент — Ego Promptfolio{% endblock %}
+{% block content %}
+<section class="page-header py-5 bg-light">
+  <div class="container animate-fade-in">
+    <h1 class="fw-bold">FAQ-ассистент</h1>
+    <p class="text-secondary mb-0">Задайте вопрос — ассистент поможет найти информацию в базе знаний.</p>
+  </div>
+</section>
+<section class="faq-section py-5">
+  <div class="container">
+    <div class="faq-panel card border-0 shadow-sm p-4 p-md-5 mx-auto"
+         data-faq-api-url="{{ faq_api_url }}">
+      {% if not faq_api_url %}
+      <div id="faq-status" class="faq-status alert alert-info mb-4" role="status" aria-live="polite">
+        FAQ-ассистент пока не настроен.
+      </div>
+      {% else %}
+      <div id="faq-status" class="faq-status alert alert-secondary mb-4" role="status" aria-live="polite">
+        Для работы чата требуется JavaScript. Подключение проверяется при отправке вопроса.
+      </div>
+      {% endif %}
+
+      <div id="faq-conversation" class="faq-conversation mb-4" aria-live="polite"
+           aria-label="Диалог с FAQ-ассистентом"></div>
+
+      <form id="faq-form" class="faq-form">
+        <label for="faq-question" class="form-label fw-semibold">Ваш вопрос</label>
+        <div class="input-group">
+          <input id="faq-question" name="message" class="form-control"
+                 type="text" maxlength="4000" autocomplete="off"
+                 placeholder="Например: где узнать больше о проектах?"
+                 aria-describedby="faq-status" required disabled>
+          <button id="faq-submit" class="btn btn-primary" type="submit" disabled>
+            Отправить
+          </button>
+        </div>
+        <button id="faq-new-chat" class="btn btn-outline-secondary btn-sm mt-3"
+                type="button" disabled>
+          Новый диалог
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/faq.js') }}" defer></script>
+{% endblock %}

@@ -2,7 +2,7 @@
 
 import logging
 
-from flask import Blueprint, abort, flash, redirect, render_template, url_for
+from flask import Blueprint, abort, current_app, flash, redirect, render_template, url_for
 
 from data.cases import get_all_cases, get_case_by_slug
 from extensions import db
@@ -35,6 +35,14 @@ def case_detail(slug):
     if case is None:
         abort(404)
     return render_template("main/case_detail.html", case=case)
+
+
+@main_bp.route("/faq")
+def faq():
+    """Страница FAQ-ассистента."""
+    return render_template(
+        "main/faq.html", faq_api_url=current_app.config["FAQ_API_URL"]
+    )
 
 
 @main_bp.route("/contact", methods=["GET", "POST"])

@@ -16,6 +16,10 @@
              href="{{ url_for('main.cases_list') }}">Кейсы</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.faq' %}active{% endif %}"
+             href="{{ url_for('main.faq') }}">FAQ-ассистент</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link {% if request.endpoint == 'main.contact' %}active{% endif %}"
              href="{{ url_for('main.contact') }}">Контакты</a>
         </li>

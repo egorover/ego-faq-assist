@@ -21,3 +21,4 @@ class Config:
 
     LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
     FLASK_DEBUG = os.environ.get("FLASK_DEBUG", "0") == "1"
+    FAQ_API_URL = os.environ.get("FAQ_API_URL", "").strip()
