@@ -29,6 +29,9 @@ class Settings:
     index_path: Path
     metadata_path: Path
     memory_db_path: Path
+    real_knowledge_dir: Path = PROJECT_ROOT / "knowledge" / "real"
+    index_versions_dir: Path | None = None
+    active_index_manifest_path: Path | None = None
 
     @classmethod
     def from_env(cls, env_file: Path | None = None) -> "Settings":
@@ -65,6 +68,9 @@ class Settings:
             raise ValueError("MAX_MESSAGE_LENGTH must be between 1 and 4000.")
 
         data_dir = Path(value("DATA_DIR", str(PROJECT_ROOT / "data"))).resolve()
+        real_knowledge_dir = Path(
+            value("REAL_KNOWLEDGE_DIR", str(PROJECT_ROOT / "knowledge" / "real"))
+        ).resolve()
         memory_db_path = Path(
             value("MEMORY_DB_PATH", str(PROJECT_ROOT / "data" / "conversations.sqlite3"))
         ).resolve()
@@ -94,9 +100,29 @@ class Settings:
             index_path=Path(value("FAISS_INDEX_PATH", str(data_dir / "faiss.index"))).resolve(),
             metadata_path=Path(value("METADATA_PATH", str(data_dir / "metadata.json"))).resolve(),
             memory_db_path=memory_db_path,
+            real_knowledge_dir=real_knowledge_dir,
+            index_versions_dir=Path(
+                value("INDEX_VERSIONS_DIR", str(data_dir / "index_versions"))
+            ).resolve(),
+            active_index_manifest_path=Path(
+                value("ACTIVE_INDEX_MANIFEST_PATH", str(data_dir / "active_index.json"))
+            ).resolve(),
         )
 
     def provider_credentials(self, provider: str) -> tuple[str, str | None]:
         if provider == "proxyapi":
             return self.proxyapi_api_key, self.proxyapi_base_url or None
         return self.openai_api_key, None
+
+    @property
+    def effective_index_versions_dir(self) -> Path:
+        return self.index_versions_dir or self.data_dir / "index_versions"
+
+    @property
+    def effective_active_index_manifest_path(self) -> Path:
+        return self.active_index_manifest_path or self.data_dir / "active_index.json"
+
+    @property
+    def effective_index_migration_marker_path(self) -> Path:
+        manifest_path = self.effective_active_index_manifest_path
+        return manifest_path.with_name(f"{manifest_path.name}.initialized")

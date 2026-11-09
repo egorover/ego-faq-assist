@@ -1,0 +1,178 @@
+{
+  "dataset_type": "pilot",
+  "dataset_name": "ego_promptfolio",
+  "records": [
+    {
+      "id": "ep-k01",
+      "source": "ego-promptfolio/templates/main/index.html",
+      "source_locator": {
+        "path": "templates/main/index.html",
+        "section": "Главная страница, hero-section, абзац lead"
+      },
+      "source_excerpt": [
+        {
+          "label": "Перечень направлений",
+          "quote": "Мы проектируем ботов, магазины, CRM-интеграции, корпоративные сайты и AI-ассистентов —"
+        }
+      ],
+      "provenance_status": "source_verified",
+      "owner_review_required": true,
+      "notes": "Локатор указывает место текста, но не подтверждает фактическую достоверность, актуальность услуг или условия их оказания."
+    },
+    {
+      "id": "ep-k02",
+      "source": "ego-promptfolio/data/cases.py",
+      "source_locator": {
+        "path": "data/cases.py",
+        "section": "CASES, slug telegram-bot, поле body"
+      },
+      "source_excerpt": [
+        {
+          "label": "Заказы",
+          "quote": "Для retail-сети мы спроектировали Telegram-бота, который принимает заказы,"
+        },
+        {
+          "label": "Статус доставки и передача оператору",
+          "quote": "показывает статус доставки и передаёт сложные запросы оператору."
+        }
+      ],
+      "provenance_status": "source_verified",
+      "owner_review_required": true,
+      "notes": "Учебное описание кейса. Наличие текста в исходнике не подтверждает фактическую реализацию или применимость возможностей к другим проектам."
+    },
+    {
+      "id": "ep-k03",
+      "source": "ego-promptfolio/data/cases.py",
+      "source_locator": {
+        "path": "data/cases.py",
+        "section": "CASES, slug online-store, поле body, абзац «Функции»"
+      },
+      "source_excerpt": [
+        {
+          "label": "Функции магазина",
+          "quote": "фильтры каталога, промокоды, email-триггеры, аналитика конверсий."
+        }
+      ],
+      "provenance_status": "source_verified",
+      "owner_review_required": true,
+      "notes": "Учебное описание одного примера; не является перечнем стандартных функций или обязательством по новым заказам."
+    },
+    {
+      "id": "ep-k04",
+      "source": "ego-promptfolio/data/cases.py",
+      "source_locator": {
+        "path": "data/cases.py",
+        "section": "CASES, slug crm-automation, поле body"
+      },
+      "source_excerpt": [
+        {
+          "label": "Исходная задача",
+          "quote": "B2B-компания тратила часы на перенос данных между CRM, таблицами и почтой."
+        },
+        {
+          "label": "ETL и проверка дубликатов",
+          "quote": "Мы построили ETL-пайплайн: webhooks, периодические задачи, валидация дубликатов лидов."
+        },
+        {
+          "label": "Дашборд",
+          "quote": "Дашборд для sales-отдела показывает воронку в реальном времени;"
+        }
+      ],
+      "provenance_status": "source_verified",
+      "owner_review_required": true,
+      "notes": "Учебное описание кейса. Поддерживаемые CRM, интеграции и фактическая достоверность не подтверждены."
+    },
+    {
+      "id": "ep-k05",
+      "source": "ego-promptfolio/data/cases.py",
+      "source_locator": {
+        "path": "data/cases.py",
+        "section": "CASES, slug ai-support-assistant, поле body"
+      },
+      "source_excerpt": [
+        {
+          "label": "Ответы и статьи",
+          "quote": "Ассистент отвечает на типовые вопросы, предлагает статьи и создаёт тикет,"
+        },
+        {
+          "label": "Условие создания тикета",
+          "quote": "если уверенность модели ниже порога."
+        }
+      ],
+      "provenance_status": "source_verified",
+      "owner_review_required": true,
+      "notes": "Учебное описание кейса; не обещает такую функциональность для всех ассистентов и не описывает текущую конфигурацию EgoFAQ Assist."
+    },
+    {
+      "id": "ep-k06",
+      "source": "ego-promptfolio/templates/main/contact.html",
+      "source_locator": {
+        "path": "templates/main/contact.html",
+        "section": "Форма обратной связи, поля name, email, phone и subject"
+      },
+      "source_excerpt": [
+        {
+          "label": "Поле имени",
+          "quote": "{{ form.name.label(class=\"form-label\") }}"
+        },
+        {
+          "label": "Поле email",
+          "quote": "{{ form.email.label(class=\"form-label\") }}"
+        },
+        {
+          "label": "Поле телефона",
+          "quote": "{{ form.phone.label(class=\"form-label\") }}"
+        },
+        {
+          "label": "Поле описания задачи",
+          "quote": "{{ form.subject(class=\"form-control\" + (\" is-invalid\" if form.subject.errors else \"\"), rows=\"4\", placeholder=\"Кратко опишите задачу или вопрос\") }}"
+        }
+      ],
+      "provenance_status": "source_verified",
+      "owner_review_required": true,
+      "notes": "Подтверждено содержимое шаблона, но не работоспособность формы в развернутом окружении, срок ответа или наличие иных каналов связи."
+    },
+    {
+      "id": "ep-k07",
+      "source": "ego-promptfolio/data/cases.py",
+      "source_locator": {
+        "path": "data/cases.py",
+        "section": "CASES, slug corporate-website, поля short и body"
+      },
+      "source_excerpt": [
+        {
+          "label": "Характеристики в кратком описании",
+          "quote": "Представительский сайт с CMS, мультиязычностью и SEO-оптимизацией."
+        },
+        {
+          "label": "Содержание сайта в описании кейса",
+          "quote": "Корпоративный сайт производственной компании: услуги, кейсы, новости, контакты филиалов."
+        }
+      ],
+      "provenance_status": "source_verified",
+      "owner_review_required": true,
+      "notes": "Учебное описание кейса; не подтверждает, что перечисленные функции включены в каждый проект."
+    },
+    {
+      "id": "ep-k08",
+      "source": "ego-promptfolio/data/cases.py",
+      "source_locator": {
+        "path": "data/cases.py",
+        "section": "CASES, slug telegram-bot, поле body, абзац «Результат»"
+      },
+      "source_excerpt": [
+        {
+          "label": "Доля обращений",
+          "quote": "до 40% обращений закрываются без участия оператора,"
+        },
+        {
+          "label": "Время ответа",
+          "quote": "среднее время ответа — менее 30 секунд."
+        }
+      ],
+      "provenance_status": "source_verified",
+      "owner_review_required": true,
+      "notes": "Числа присутствуют в описании сайта, но не проверены независимо и не подтверждены владельцем. Не трактовать как гарантию, типовой результат или SLA."
+    }
+  ]
+}

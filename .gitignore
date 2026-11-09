@@ -10,6 +10,10 @@ __pycache__/
 *.sqlite3-*
 *.db
 *.db-*
+/data/active_index.json
+/data/active_index.json.initialized
+/data/index_versions/
+/knowledge/real/
 faiss.index
 *.index
 metadata.json

@@ -1,6 +1,7 @@
 import json
 import os
 from pathlib import Path
+from typing import Any
 
 import faiss
 import numpy as np
@@ -19,7 +20,7 @@ def _normalized_vectors(vectors: list[list[float]] | np.ndarray) -> np.ndarray:
 
 
 class FAISSVectorStore:
-    def __init__(self, index: faiss.Index, metadata: list[dict[str, str]]):
+    def __init__(self, index: faiss.Index, metadata: list[dict[str, Any]]):
         if index.ntotal != len(metadata):
             raise ValueError("FAISS index and metadata have different item counts.")
         self.index = index
@@ -34,7 +35,7 @@ class FAISSVectorStore:
         normalized = _normalized_vectors(vectors)
         index = faiss.IndexFlatIP(normalized.shape[1])
         index.add(normalized)
-        metadata = [
+        metadata: list[dict[str, Any]] = [
             {"question": item.question, "answer": item.answer, "source": item.source}
             for item in entries
         ]
@@ -49,11 +50,18 @@ class FAISSVectorStore:
             metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
         except (RuntimeError, OSError, json.JSONDecodeError) as exc:
             raise ValueError(f"Unable to load knowledge index: {exc}") from exc
+        if isinstance(metadata, dict):
+            metadata = metadata.get("records")
         if not isinstance(metadata, list) or not all(isinstance(item, dict) for item in metadata):
-            raise ValueError("Knowledge metadata must be a JSON list of objects.")
+            raise ValueError("Knowledge metadata must contain a list of record objects.")
         return cls(index, metadata)
 
-    def save(self, index_path: Path, metadata_path: Path) -> None:
+    def save(
+        self,
+        index_path: Path,
+        metadata_path: Path,
+        metadata_document: dict[str, object] | None = None,
+    ) -> None:
         index_path.parent.mkdir(parents=True, exist_ok=True)
         metadata_path.parent.mkdir(parents=True, exist_ok=True)
         index_temp = index_path.with_suffix(index_path.suffix + ".tmp")
@@ -61,7 +69,12 @@ class FAISSVectorStore:
         try:
             faiss.write_index(self.index, str(index_temp))
             metadata_temp.write_text(
-                json.dumps(self.metadata, ensure_ascii=False, indent=2), encoding="utf-8"
+                json.dumps(
+                    metadata_document if metadata_document is not None else self.metadata,
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+                encoding="utf-8",
             )
             os.replace(index_temp, index_path)
             os.replace(metadata_temp, metadata_path)
@@ -80,4 +93,3 @@ class FAISSVectorStore:
                 continue
             results.append({**self.metadata[int(index)], "similarity": float(score)})
         return results
-

@@ -93,17 +93,55 @@ def test_chat_reports_missing_index(tmp_path):
     assert "index" in response.json()["detail"].lower()
 
 
-def test_chat_sanitizes_llm_connection_errors(tmp_path):
+def test_chat_does_not_expose_provenance_fields(tmp_path):
+    settings = make_settings(tmp_path)
+    llm = FakeLLM()
+    store = FAISSVectorStore.from_embeddings(
+        [KnowledgeEntry("Часы работы", "По будням.", "faq.json")], [[1.0, 0.0]]
+    )
+    store.metadata[0].update(
+        {
+            "dataset_id": "pilot:sample",
+            "faq_id": "sample-1",
+            "provenance": {
+                "source_excerpt": [{"label": "internal", "quote": "private excerpt"}],
+                "notes": "private note",
+                "provenance_status": "source_verified",
+                "owner_review_required": True,
+            },
+        }
+    )
+    service = RAGService(FakeEmbeddings(), llm, store, settings)
+
+    with TestClient(create_app(settings, service)) as client:
+        response = client.post("/chat", json={"message": "Когда открыто?"})
+
+    assert response.status_code == 200
+    assert set(response.json()["sources"][0]) == {"question", "source", "similarity"}
+    prompt_context = llm.calls[0][-1]["content"]
+    assert "private excerpt" not in prompt_context
+    assert "private note" not in prompt_context
+
+
+def test_chat_sanitizes_llm_connection_errors(tmp_path, caplog):
     settings = make_settings(tmp_path)
     store = FAISSVectorStore.from_embeddings(
         [KnowledgeEntry("Часы работы", "По будням.", "faq.json")], [[1.0, 0.0]]
     )
     service = RAGService(FakeEmbeddings(), FailingLLM(), store, settings)
-    with TestClient(create_app(settings, service)) as client:
-        response = client.post("/chat", json={"message": "Когда открыто?"})
+    with caplog.at_level("WARNING", logger="ego_faq.rag"):
+        with TestClient(create_app(settings, service)) as client:
+            response = client.post("/chat", json={"message": "Когда открыто?"})
 
     assert response.status_code == 502
     assert response.json()["detail"] == "Unable to reach the configured LLM provider."
+    stage_logs = [
+        record.getMessage()
+        for record in caplog.records
+        if record.name == "ego_faq.rag" and "RAG stage=" in record.getMessage()
+    ]
+    assert len(stage_logs) == 1
+    assert "RAG stage=chat_completion status=failure" in stage_logs[0]
 
 
 def test_proxy_and_openai_configuration_selection(tmp_path, monkeypatch):
