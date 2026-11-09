@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Главная — Ego Promptfolio{% endblock %}
+{% block content %}
+<section class="hero-section text-white text-center py-5 py-lg-6">
+  <div class="container animate-fade-in">
+    <p class="text-uppercase letter-spacing mb-2 opacity-75">Студия цифровых продуктов</p>
+    <h1 class="display-4 fw-bold mb-3">Решения, которые масштабируют ваш бизнес</h1>
+    <p class="lead col-lg-8 mx-auto mb-4">
+      Мы проектируем ботов, магазины, CRM-интеграции, корпоративные сайты и AI-ассистентов —
+      от идеи до запуска и поддержки.
+    </p>
+    <a href="{{ url_for('main.contact') }}" class="btn btn-light btn-lg px-4 shadow hover-lift">Обратная связь</a>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5 animate-fade-in">
+      <h2 class="fw-bold">Кейсы</h2>
+      <p class="text-secondary col-lg-7 mx-auto">Пять примеров проектов, которые мы реализовали для клиентов из разных отраслей.</p>
+    </div>
+    <div class="row g-4">
+      {% for case in cases %}
+      <div class="col-md-6 col-lg-4">
+        <article class="card case-card h-100 border-0 shadow-sm hover-lift">
+          <img src="{{ url_for('static', filename='images/' + case.image) }}" class="card-img-top case-img" alt="{{ case.title }}">
+          <div class="card-body d-flex flex-column">
+            <h3 class="h5 card-title">{{ case.title }}</h3>
+            <p class="card-text text-secondary flex-grow-1">{{ case.short }}</p>
+            <a href="{{ url_for('main.case_detail', slug=case.slug) }}" class="btn btn-outline-primary align-self-start">Подробнее</a>
+          </div>
+        </article>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-5">
+      <a href="{{ url_for('main.cases_list') }}" class="btn btn-primary btn-lg hover-lift">Все кейсы</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

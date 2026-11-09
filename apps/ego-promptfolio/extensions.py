@@ -1,0 +1,13 @@
+"""Общие расширения Flask (инициализация без привязки к app)."""
+
+from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
+from flask_wtf.csrf import CSRFProtect
+
+db = SQLAlchemy()
+login_manager = LoginManager()
+csrf = CSRFProtect()
+
+login_manager.login_view = "admin.login"
+login_manager.login_message = "Войдите в админ-панель для доступа."
+login_manager.login_message_category = "warning"

@@ -1,0 +1,32 @@
+# Виртуальное окружение
+.venv/
+venv/
+ENV/
+env/
+
+# Данные и базы данных Flask
+instance/
+*.db
+*.sqlite
+
+# Окружение и секреты
+.env
+.env.secret
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Тестирование
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Редактор VS Code и логи ИИ-агентов
+.vscode/
+.clinerules
+
+# Системные файлы
+.DS_Store
+Thumbs.db
