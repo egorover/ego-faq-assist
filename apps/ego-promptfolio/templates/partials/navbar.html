@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="{{ url_for('main.index') }}">Ego Promptfolio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Меню">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}"
+             href="{{ url_for('main.index') }}">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint in ('main.cases_list', 'main.case_detail') %}active{% endif %}"
+             href="{{ url_for('main.cases_list') }}">Кейсы</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.faq' %}active{% endif %}"
+             href="{{ url_for('main.faq') }}">FAQ-ассистент</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.contact' %}active{% endif %}"
+             href="{{ url_for('main.contact') }}">Контакты</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-warning" href="{{ url_for('admin.login') }}">Admin</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

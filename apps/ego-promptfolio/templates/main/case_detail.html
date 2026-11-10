@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}{{ case.title }} — Ego Promptfolio{% endblock %}
+{% block content %}
+<section class="page-header py-4 bg-light">
+  <div class="container animate-fade-in">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-2">
+        <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Главная</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('main.cases_list') }}">Кейсы</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ case.title }}</li>
+      </ol>
+    </nav>
+    <h1 class="fw-bold">{{ case.title }}</h1>
+    <p class="text-secondary mb-0">{{ case.short }}</p>
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-5">
+        <img src="{{ url_for('static', filename='images/' + case.image) }}" class="img-fluid rounded shadow case-detail-img" alt="{{ case.title }}">
+      </div>
+      <div class="col-lg-7 case-body animate-fade-in">
+        {{ case.body | safe }}
+        <a href="{{ url_for('main.cases_list') }}" class="btn btn-outline-secondary mt-4">← Назад к кейсам</a>
+        <a href="{{ url_for('main.contact') }}" class="btn btn-primary mt-4 ms-2">Обсудить проект</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
