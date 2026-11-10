@@ -1,20 +1,121 @@
 # Состояние проекта
 
-## MVP реализован
+Дата актуализации: 10.11.2026
 
-- FastAPI endpoints `/chat`, `/health`, `/ready`.
-- Отдельные OpenAI-compatible chat adapters для ProxyAPI (default) и OpenAI.
-- Независимая настройка embedding provider, модели, ключа и endpoint.
-- FAQ JSON и TXT ingestion; FAISS cosine similarity retrieval и configurable threshold.
-- Источники, сессионная persistent memory в SQLite, статический responsive chat UI.
-- Демо-FAQ с вымышленными данными; fake-provider автоматические тесты.
+## 1. Общий статус
 
-## Проверки и фактические границы
+Локальный MVP Ego FAQ Assist реализован и успешно проверен на пилотной базе знаний Ego Promptfolio.
 
-- `python -m pytest -q`: 17 passed.
-- `python -m compileall -q app tests` и `node --check frontend\app.js`: passed.
-- Live HTTP smoke без credentials: `/` и `/health` вернули 200, `/ready` и `/chat` вернули ожидаемый 503 из-за отсутствующего индекса.
-- Внешние chat/embedding подключения не проверены: credentials не предоставлялись.
-- Не запускались production deployment, внешний репозиторий или интеграция с личным сайтом.
-- Перед живым использованием следует построить индекс со своими данными и настроенными API credentials.
-- Автоматические тесты выполняются локально на fake providers и не отправляют запросы в сеть.
+Подтверждена работа полного пользовательского сценария:
+- загрузка версионной базы знаний;
+- поиск релевантных FAQ через FAISS;
+- получение ответа через ProxyAPI;
+- возврат источника ответа;
+- отображение ответа в браузерном FAQ-интерфейсе.
+
+Статус: **локальный MVP — PASS**.
+
+Это не означает готовность к production-развёртыванию или коммерческому запуску.
+
+## 2. Архитектура
+
+Проект организован как Monorepo с двумя независимыми приложениями.
+
+### FAQ Assist
+- Backend: FastAPI, точка входа `app.api:app`.
+- API: `/chat`, `/health`, `/ready`.
+- Web client: статический интерфейс в `frontend/`, обслуживается FastAPI.
+- Retrieval: FAISS, cosine similarity, configurable threshold.
+- Embeddings и генерация ответов: OpenAI-compatible API.
+- Поддерживаемые провайдеры: ProxyAPI и OpenAI.
+- История диалога: persistent session memory на SQLite.
+- Индексы: версионное хранение с manifest, metadata и provenance.
+
+### Ego Promptfolio
+- Отдельное Flask-приложение в `apps/ego-promptfolio/`.
+- Собственная точка входа `app.py`.
+- Собственные зависимости и окружение.
+- Не подключено напрямую к FAQ API.
+- Используется как демонстрационный сайт и источник пилотного контента.
+
+## 3. Pilot Knowledge Base
+
+Источник данных:
+`knowledge/pilot/ego_promptfolio/`
+
+Параметры:
+- Количество FAQ: 8.
+- `dataset_id`: `pilot:ego_promptfolio`.
+- Embedding provider: `proxyapi`.
+- Embedding model: `text-embedding-3-small`.
+- Runtime: `data/pilot_runtime/ego_promptfolio/`.
+- Активная версия:
+  `v20261110T093225493184Z-37db0950747f4458b32feba60b27c813`.
+
+Версия содержит:
+- `index.faiss`;
+- `metadata.json`;
+- `provenance.json`.
+
+Активная версия выбирается через `active_index.json`.
+Индекс был успешно собран и активирован без изменения основной demo-базы и `knowledge/real/`.
+
+Пилотный runtime исключён из Git через правило `/data/pilot_runtime/` в корневом `.gitignore`.
+
+## 4. Подтверждённые проверки
+
+| Проверка | Результат |
+|---|---|
+| Валидация pilot FAQ и provenance | PASS |
+| Сборка версионного pilot index | PASS |
+| Загрузка `pilot:ego_promptfolio` | PASS |
+| FastAPI `/health` | HTTP 200 |
+| FastAPI `/ready` | HTTP 200 |
+| Один реальный `POST /chat` | HTTP 200 |
+| Получение ответа через ProxyAPI | PASS |
+| Возврат источника ответа | PASS |
+| Отображение ответа в браузере | PASS |
+
+Пример проверенного вопроса:
+«Какие направления перечислены на сайте Ego Promptfolio?»
+
+Полученный ответ:
+«На сайте Ego Promptfolio перечислены следующие направления: боты, интернет-магазины, CRM-интеграции, корпоративные сайты и AI-ассистенты.»
+
+Источник:
+`ego-promptfolio/templates/main/index.html`
+
+Similarity: `0.795`.
+
+Также ранее успешно проходили автоматические тесты backend. Последний зафиксированный полный результат после работ с provenance: 91 passed.
+
+## 5. Ограничения пилота
+
+- Контент Ego Promptfolio носит учебный и демонстрационный характер.
+- Наличие `source_verified` означает соответствие информации исходному коду сайта, а не независимую проверку коммерческих утверждений.
+- Все пилотные FAQ требуют проверки владельцем (`owner_review_required: true`); записей со статусом `owner_approved` нет.
+- Восемь FAQ не являются полноценной универсальной базой знаний для реального клиента.
+- Flask Ego Promptfolio пока не интегрирован с FAQ API.
+- Проверен локальный сценарий, а не production deployment.
+- Не подтверждены эксплуатация под реальной нагрузкой, production security, мониторинг и восстановление после сбоев.
+
+## 6. Следующие этапы
+
+1. Завершить документационную и Git-фиксацию текущего MVP.
+2. Подготовить и проверить реальную клиентскую базу знаний.
+3. Проверить безопасность, конфигурацию и эксплуатационные сценарии.
+4. Подготовить серверное развёртывание.
+5. Спроектировать интеграцию FAQ-ассистента с внешним сайтом.
+6. Провести приёмку перед реальным клиентским запуском.
+
+Следующие этапы не считаются выполненными до фактической реализации и проверки.
+
+## 7. Текущая рабочая конфигурация
+
+- Основная ветка: `main`.
+- Backend Python environment: корневой `.venv`.
+- Pilot runtime: `data/pilot_runtime/ego_promptfolio/`.
+- Локальный FAQ backend: `http://127.0.0.1:8000`.
+- Для загрузки пилотного индекса используются отдельные значения `INDEX_VERSIONS_DIR` и `ACTIVE_INDEX_MANIFEST_PATH`.
+
+Секреты и `.env` не входят в Git. Runtime-данные, локальные окружения и логи также не должны попадать в репозиторий.

@@ -13,6 +13,7 @@ __pycache__/
 /data/active_index.json
 /data/active_index.json.initialized
 /data/index_versions/
+/data/pilot_runtime/
 /knowledge/real/
 faiss.index
 *.index
