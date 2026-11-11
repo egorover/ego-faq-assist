@@ -47,10 +47,11 @@ python app.py
 | Переменная | Описание |
 |------------|----------|
 | `SECRET_KEY` | Секрет для сессий и CSRF (обязательно сменить в production) |
-| `FLASK_DEBUG` | `1` — режим отладки |
+| `FLASK_DEBUG` | `1` — режим отладки; для production использовать `0` |
 | `DATABASE_URL` | URI БД (по умолчанию SQLite в `instance/app.db`) |
 | `ADMIN_USERNAME` | Логин администратора (по умолчанию `admin`) |
-| `ADMIN_PASSWORD` | Пароль администратора |
+| `ADMIN_PASSWORD` | Обязательный пароль администратора; без него приложение не запустится |
+| `FAQ_API_URL` | URL API FAQ-ассистента, например `https://ego-faq-assist.onrender.com/chat` |
 | `LOG_LEVEL` | Уровень логов: `DEBUG`, `INFO`, … |
 
 ### Смена пароля администратора
@@ -58,7 +59,26 @@ python app.py
 1. Укажите новый `ADMIN_PASSWORD` в `.env`.
 2. Перезапустите приложение — хеш пароля обновится для пользователя с `ADMIN_USERNAME`.
 
-При **первом** запуске, если `ADMIN_PASSWORD` не задан, создаётся пользователь с временным паролем `changeme` (см. логи).
+При запуске `ADMIN_PASSWORD` обязателен. Если переменная не задана или пуста, приложение завершит запуск с ошибкой. При каждом запуске пароль пользователя `ADMIN_USERNAME` обновляется значением из конфигурации.
+
+## Развёртывание на Render
+
+Для отдельного Web Service Ego Promptfolio используйте:
+
+- **Root Directory:** `apps/ego-promptfolio`
+- **Build Command:** `pip install -r requirements.txt`
+- **Start Command:** `gunicorn app:app --bind 0.0.0.0:$PORT`
+- **Health Check Path:** `/health`
+
+Обязательные переменные окружения:
+
+- `SECRET_KEY` — случайный секретный ключ.
+- `ADMIN_USERNAME` — логин администратора.
+- `ADMIN_PASSWORD` — надёжный пароль администратора.
+- `FLASK_DEBUG=0` — отключённый режим отладки.
+- `FAQ_API_URL=https://ego-faq-assist.onrender.com/chat` — API существующего FAQ-сервиса.
+
+SQLite на временном диске бесплатного Render не обеспечивает постоянное хранение данных. Для долговременного хранения заявок потребуется подключить постоянное хранилище или PostgreSQL.
 
 ## Структура проекта
 
