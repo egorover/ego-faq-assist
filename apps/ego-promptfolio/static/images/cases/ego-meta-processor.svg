@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img" aria-label="EgoMeta Processor">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#064e3b"/></linearGradient></defs>
+  <rect width="800" height="450" rx="24" fill="url(#bg)"/>
+  <circle cx="650" cy="90" r="150" fill="#fff" opacity=".08"/><circle cx="110" cy="390" r="180" fill="#fff" opacity=".07"/>
+  <rect x="72" y="72" width="656" height="306" rx="22" fill="#0f172a" opacity=".18" stroke="#fff" stroke-opacity=".25"/>
+  <path d="M112 132h576" stroke="#fff" stroke-opacity=".35" stroke-width="2"/>
+  <circle cx="132" cy="105" r="7" fill="#fff" opacity=".8"/><circle cx="158" cy="105" r="7" fill="#fff" opacity=".55"/><circle cx="184" cy="105" r="7" fill="#fff" opacity=".3"/>
+  <text x="112" y="225" fill="#fff" font-family="Segoe UI,Arial,sans-serif" font-size="42" font-weight="700">EgoMeta Processor</text>
+  <text x="114" y="274" fill="#fff" opacity=".82" font-family="Segoe UI,Arial,sans-serif" font-size="23">n8n · Automation</text>
+  <path d="M114 316h210" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".65"/>
+</svg>
