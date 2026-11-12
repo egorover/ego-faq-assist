@@ -55,7 +55,7 @@ class OpenAICompatibleEmbeddings:
             api_key=api_key,
             base_url=base_url,
             timeout=timeout,
-            max_retries=2,
+            max_retries=0,
         )
         self.model = model
 
