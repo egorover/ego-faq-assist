@@ -134,7 +134,7 @@ def test_chat_sanitizes_llm_connection_errors(tmp_path, caplog):
             response = client.post("/chat", json={"message": "Когда открыто?"})
 
     assert response.status_code == 502
-    assert response.json()["detail"] == "Unable to reach the configured LLM provider."
+    assert response.json()["detail"] == "Unable to reach the configured AI provider."
     stage_logs = [
         record.getMessage()
         for record in caplog.records

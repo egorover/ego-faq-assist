@@ -4,107 +4,251 @@
   "records": [
     {
       "id": "ep-k01",
-      "source": "ego-promptfolio/templates/main/index.html",
+      "source": "ego-promptfolio/data/cases.py",
       "source_locator": {
-        "path": "templates/main/index.html",
-        "section": "Главная страница, hero-section, абзац lead"
+        "path": "data/cases.py",
+        "section": "CASES, slug ego-promptfolio, поля title и short"
       },
       "source_excerpt": [
         {
-          "label": "Перечень направлений",
-          "quote": "Мы проектируем ботов, магазины, CRM-интеграции, корпоративные сайты и AI-ассистентов —"
+          "label": "Название проекта",
+          "quote": "Ego Promptfolio"
+        },
+        {
+          "label": "Краткое описание",
+          "quote": "Собственное Flask-приложение и платформа для представления инженерных и AI-проектов."
         }
       ],
       "provenance_status": "source_verified",
       "owner_review_required": true,
-      "notes": "Локатор указывает место текста, но не подтверждает фактическую достоверность, актуальность услуг или условия их оказания."
+      "notes": "Подтверждает содержание описания проекта в исходнике, но не является независимой проверкой всех функций или их доступности."
     },
     {
       "id": "ep-k02",
       "source": "ego-promptfolio/data/cases.py",
       "source_locator": {
         "path": "data/cases.py",
-        "section": "CASES, slug telegram-bot, поле body"
+        "section": "CASES, краткие описания четырёх проектов"
       },
       "source_excerpt": [
         {
-          "label": "Заказы",
-          "quote": "Для retail-сети мы спроектировали Telegram-бота, который принимает заказы,"
+          "label": "EgoFAQ Assist",
+          "quote": "ИИ-ассистент, который отвечает на вопросы по контролируемой базе знаний и показывает источники."
         },
         {
-          "label": "Статус доставки и передача оператору",
-          "quote": "показывает статус доставки и передаёт сложные запросы оператору."
+          "label": "EgoBiz Wiki",
+          "quote": "Корпоративный RAG-ассистент для поиска по внутренним документам и ответов с источниками."
+        },
+        {
+          "label": "EgoMeta Processor",
+          "quote": "Автоматизация обработки заказов на n8n с ИИ, идемпотентностью и контролем ошибок."
+        },
+        {
+          "label": "Ego Promptfolio",
+          "quote": "Собственное Flask-приложение и платформа для представления инженерных и AI-проектов."
         }
       ],
       "provenance_status": "source_verified",
       "owner_review_required": true,
-      "notes": "Учебное описание кейса. Наличие текста в исходнике не подтверждает фактическую реализацию или применимость возможностей к другим проектам."
+      "notes": "Состав портфолио подтверждается записями CASES в исходнике. Это не независимая оценка состояния или зрелости каждого проекта."
     },
     {
       "id": "ep-k03",
       "source": "ego-promptfolio/data/cases.py",
       "source_locator": {
         "path": "data/cases.py",
-        "section": "CASES, slug online-store, поле body, абзац «Функции»"
+        "section": "CASES, slug ego-faq-assist, поля short, body, разделы Решение и Возможности"
       },
       "source_excerpt": [
         {
-          "label": "Функции магазина",
-          "quote": "фильтры каталога, промокоды, email-триггеры, аналитика конверсий."
+          "label": "Назначение",
+          "quote": "Создать ИИ-ассистента, который отвечает на вопросы по заданной базе знаний,"
+        },
+        {
+          "label": "Поиск и генерация",
+          "quote": "FAISS находит подходящие фрагменты, а языковая модель"
+        },
+        {
+          "label": "Источники",
+          "quote": "Ответы с указанием источников."
         }
       ],
       "provenance_status": "source_verified",
       "owner_review_required": true,
-      "notes": "Учебное описание одного примера; не является перечнем стандартных функций или обязательством по новым заказам."
+      "notes": "Подтверждает описанную архитектуру и функции. Не доказывает промышленную готовность, доступность или долговременное хранение данных."
     },
     {
       "id": "ep-k04",
       "source": "ego-promptfolio/data/cases.py",
       "source_locator": {
         "path": "data/cases.py",
-        "section": "CASES, slug crm-automation, поле body"
+        "section": "CASES, slug ego-biz-wiki, поля short и body"
       },
       "source_excerpt": [
         {
-          "label": "Исходная задача",
-          "quote": "B2B-компания тратила часы на перенос данных между CRM, таблицами и почтой."
+          "label": "Назначение",
+          "quote": "Корпоративный RAG-ассистент для поиска по внутренним документам и ответов с источниками."
         },
         {
-          "label": "ETL и проверка дубликатов",
-          "quote": "Мы построили ETL-пайплайн: webhooks, периодические задачи, валидация дубликатов лидов."
+          "label": "Обработка документов",
+          "quote": "Документы обрабатываются и индексируются,"
         },
         {
-          "label": "Дашборд",
-          "quote": "Дашборд для sales-отдела показывает воронку в реальном времени;"
+          "label": "Оценка качества",
+          "quote": "Набор оценочных сценариев для проверки качества."
         }
       ],
       "provenance_status": "source_verified",
       "owner_review_required": true,
-      "notes": "Учебное описание кейса. Поддерживаемые CRM, интеграции и фактическая достоверность не подтверждены."
+      "notes": "Подтверждает содержание описания проекта. Повторная проверка запуска и промышленное развёртывание в исходнике не установлены."
     },
     {
       "id": "ep-k05",
       "source": "ego-promptfolio/data/cases.py",
       "source_locator": {
         "path": "data/cases.py",
-        "section": "CASES, slug ai-support-assistant, поле body"
+        "section": "CASES, slug ego-meta-processor, поля short и body"
       },
       "source_excerpt": [
         {
-          "label": "Ответы и статьи",
-          "quote": "Ассистент отвечает на типовые вопросы, предлагает статьи и создаёт тикет,"
+          "label": "Назначение",
+          "quote": "Обрабатывать входящие сообщения о заказах, преобразовывать свободный текст"
         },
         {
-          "label": "Условие создания тикета",
-          "quote": "если уверенность модели ниже порога."
+          "label": "Интеграции",
+          "quote": "Создан workflow на n8n с интеграцией Telegram, NocoDB и YandexGPT."
+        },
+        {
+          "label": "Ручная проверка",
+          "quote": "и передачу проблемных операций на ручную проверку."
         }
       ],
       "provenance_status": "source_verified",
       "owner_review_required": true,
-      "notes": "Учебное описание кейса; не обещает такую функциональность для всех ассистентов и не описывает текущую конфигурацию EgoFAQ Assist."
+      "notes": "Подтверждает описание workflow и его назначения, но не подтверждает промышленную эксплуатацию или измеренный бизнес-эффект."
     },
     {
       "id": "ep-k06",
+      "source": "ego-promptfolio/data/cases.py",
+      "source_locator": {
+        "path": "data/cases.py",
+        "section": "CASES, slug ego-promptfolio, поля body, разделы Решение и Возможности"
+      },
+      "source_excerpt": [
+        {
+          "label": "Стек приложения",
+          "quote": "Разработано Flask-приложение с SQLAlchemy и SQLite."
+        },
+        {
+          "label": "Публичная и административная части",
+          "quote": "Публичная часть предназначена для посетителей, административная — для управления содержимым и обращениями."
+        },
+        {
+          "label": "Защита форм",
+          "quote": "Flask-WTF и CSRF."
+        }
+      ],
+      "provenance_status": "source_verified",
+      "owner_review_required": true,
+      "notes": "Подтверждает перечисленные функции в описании проекта, но не является отдельным тестом каждой функции в развернутом окружении."
+    },
+    {
+      "id": "ep-k07",
+      "source": "ego-promptfolio/data/cases.py",
+      "source_locator": {
+        "path": "data/cases.py",
+        "section": "CASES, поля technologies четырёх проектов"
+      },
+      "source_excerpt": [
+        {
+          "label": "EgoFAQ Assist",
+          "quote": "Python, FastAPI, FAISS, RAG, SQLite, ProxyAPI, Render"
+        },
+        {
+          "label": "EgoBiz Wiki",
+          "quote": "Python, FastAPI, Streamlit, ChromaDB, Embeddings, RAG, LLM"
+        },
+        {
+          "label": "EgoMeta Processor",
+          "quote": "n8n, NocoDB, YandexGPT, Telegram API"
+        },
+        {
+          "label": "Ego Promptfolio",
+          "quote": "Python, Flask, SQLAlchemy, SQLite, Flask-Login, Flask-WTF"
+        }
+      ],
+      "provenance_status": "source_verified",
+      "owner_review_required": true,
+      "notes": "Перечни соответствуют полям technologies в исходнике. Они не означают, что все компоненты имеют одинаковую роль или используются во всех проектах."
+    },
+    {
+      "id": "ep-k08",
+      "source": "ego-promptfolio/data/cases.py",
+      "source_locator": {
+        "path": "data/cases.py",
+        "section": "CASES, slug ego-meta-processor, поле body, разделы Возможности и Результаты"
+      },
+      "source_excerpt": [
+        {
+          "label": "Идемпотентность и журналирование",
+          "quote": "Идемпотентность для защиты от повторной обработки."
+        },
+        {
+          "label": "Triple Journaling",
+          "quote": "Triple Journaling — журналирование по нескольким направлениям."
+        },
+        {
+          "label": "Экстренная остановка",
+          "quote": "Emergency Kill Switch для экстренной остановки."
+        },
+        {
+          "label": "Тестовые контуры",
+          "quote": "Документированные тестовые контуры TR, SBT и EW."
+        }
+      ],
+      "provenance_status": "source_verified",
+      "owner_review_required": true,
+      "notes": "Подтверждает описание предусмотренных механизмов и тестовых материалов. Не означает прохождение независимого аудита или наличие автоматизированного CI/CD."
+    },
+    {
+      "id": "ep-k09",
+      "source": "ego-promptfolio/data/cases.py",
+      "source_locator": {
+        "path": "data/cases.py",
+        "section": "CASES, поля status и body, разделы Статус и ограничения"
+      },
+      "source_excerpt": [
+        {
+          "label": "EgoFAQ Assist",
+          "quote": "Облачный MVP · пилот"
+        },
+        {
+          "label": "EgoBiz Wiki",
+          "quote": "RAG-проект · требуется повторная проверка запуска"
+        },
+        {
+          "label": "EgoMeta Processor",
+          "quote": "MVP · ручные тестовые прогоны"
+        },
+        {
+          "label": "Ego Promptfolio",
+          "quote": "Веб-приложение · обновление портфолио"
+        },
+        {
+          "label": "Ограничение промышленной готовности EgoFAQ Assist",
+          "quote": "промышленная готовность не подтверждена."
+        },
+        {
+          "label": "Ограничение хранения Ego Promptfolio",
+          "quote": "SQLite на временном диске бесплатного Render не обеспечивает постоянное хранение данных."
+        }
+      ],
+      "provenance_status": "source_verified",
+      "owner_review_required": true,
+      "notes": "Статусы и ограничения приведены по описаниям проектов. Это консервативная оценка зрелости, а не независимый аудит текущих развёртываний."
+    },
+    {
+      "id": "ep-k10",
       "source": "ego-promptfolio/templates/main/contact.html",
       "source_locator": {
         "path": "templates/main/contact.html",
@@ -124,55 +268,13 @@
           "quote": "{{ form.phone.label(class=\"form-label\") }}"
         },
         {
-          "label": "Поле описания задачи",
+          "label": "Описание задачи",
           "quote": "{{ form.subject(class=\"form-control\" + (\" is-invalid\" if form.subject.errors else \"\"), rows=\"4\", placeholder=\"Кратко опишите задачу или вопрос\") }}"
         }
       ],
       "provenance_status": "source_verified",
       "owner_review_required": true,
-      "notes": "Подтверждено содержимое шаблона, но не работоспособность формы в развернутом окружении, срок ответа или наличие иных каналов связи."
-    },
-    {
-      "id": "ep-k07",
-      "source": "ego-promptfolio/data/cases.py",
-      "source_locator": {
-        "path": "data/cases.py",
-        "section": "CASES, slug corporate-website, поля short и body"
-      },
-      "source_excerpt": [
-        {
-          "label": "Характеристики в кратком описании",
-          "quote": "Представительский сайт с CMS, мультиязычностью и SEO-оптимизацией."
-        },
-        {
-          "label": "Содержание сайта в описании кейса",
-          "quote": "Корпоративный сайт производственной компании: услуги, кейсы, новости, контакты филиалов."
-        }
-      ],
-      "provenance_status": "source_verified",
-      "owner_review_required": true,
-      "notes": "Учебное описание кейса; не подтверждает, что перечисленные функции включены в каждый проект."
-    },
-    {
-      "id": "ep-k08",
-      "source": "ego-promptfolio/data/cases.py",
-      "source_locator": {
-        "path": "data/cases.py",
-        "section": "CASES, slug telegram-bot, поле body, абзац «Результат»"
-      },
-      "source_excerpt": [
-        {
-          "label": "Доля обращений",
-          "quote": "до 40% обращений закрываются без участия оператора,"
-        },
-        {
-          "label": "Время ответа",
-          "quote": "среднее время ответа — менее 30 секунд."
-        }
-      ],
-      "provenance_status": "source_verified",
-      "owner_review_required": true,
-      "notes": "Числа присутствуют в описании сайта, но не проверены независимо и не подтверждены владельцем. Не трактовать как гарантию, типовой результат или SLA."
+      "notes": "Подтверждено содержимое шаблона формы. Наличие полей не подтверждает срок ответа или работоспособность формы в каждом окружении."
     }
   ]
 }

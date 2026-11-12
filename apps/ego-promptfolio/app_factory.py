@@ -41,18 +41,18 @@ def create_app(config_class=Config) -> Flask:
 
 
 def seed_admin(app: Flask) -> None:
-    """Создаёт или обновляет учётную запись администратора из конфигурации."""
+    """Создаёт или обновляет администратора из конфигурации."""
     username = app.config["ADMIN_USERNAME"]
     password = app.config.get("ADMIN_PASSWORD") or ""
+
+    if not password:
+        raise RuntimeError(
+            "ADMIN_PASSWORD must be set; refusing to start without an admin password"
+        )
 
     user = User.query.filter_by(username=username).first()
 
     if user is None:
-        if not password:
-            password = "changeme"
-            logger.warning(
-                "ADMIN_PASSWORD not set; created admin with temporary password 'changeme'"
-            )
         user = User(username=username)
         user.set_password(password)
         db.session.add(user)
@@ -60,7 +60,6 @@ def seed_admin(app: Flask) -> None:
         logger.info("Admin user created: username=%s", username)
         return
 
-    if password:
-        user.set_password(password)
-        db.session.commit()
-        logger.info("Admin password updated from environment for username=%s", username)
+    user.set_password(password)
+    db.session.commit()
+    logger.info("Admin password updated from environment for username=%s", username)

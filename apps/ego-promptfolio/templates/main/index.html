@@ -1,40 +1,37 @@
 {% extends 'base.html' %}
-{% block title %}Главная — Ego Promptfolio{% endblock %}
+{% block title %}Ego Promptfolio — AI, автоматизация и веб-разработка{% endblock %}
 {% block content %}
 <section class="hero-section text-white text-center py-5 py-lg-6">
   <div class="container animate-fade-in">
-    <p class="text-uppercase letter-spacing mb-2 opacity-75">Студия цифровых продуктов</p>
-    <h1 class="display-4 fw-bold mb-3">Решения, которые масштабируют ваш бизнес</h1>
+    <p class="text-uppercase letter-spacing mb-2 opacity-75">Ego · Практические проекты</p>
+    <h1 class="display-4 fw-bold mb-3">AI-ассистенты, автоматизация и веб-продукты</h1>
     <p class="lead col-lg-8 mx-auto mb-4">
-      Мы проектируем ботов, магазины, CRM-интеграции, корпоративные сайты и AI-ассистентов —
-      от идеи до запуска и поддержки.
+      Здесь собраны самостоятельные проекты: от RAG-ассистентов и автоматизации процессов
+      до разработки веб-приложений. Показываю реальные решения, технологии и подтверждённые ограничения.
     </p>
-    <a href="{{ url_for('main.contact') }}" class="btn btn-light btn-lg px-4 shadow hover-lift">Обратная связь</a>
+    <a href="{{ url_for('main.cases_list') }}" class="btn btn-light btn-lg px-4 shadow hover-lift">Смотреть проекты</a>
   </div>
 </section>
-
 <section class="py-5">
   <div class="container">
     <div class="text-center mb-5 animate-fade-in">
-      <h2 class="fw-bold">Кейсы</h2>
-      <p class="text-secondary col-lg-7 mx-auto">Пять примеров проектов, которые мы реализовали для клиентов из разных отраслей.</p>
+      <h2 class="fw-bold">Избранные проекты</h2>
+      <p class="text-secondary col-lg-7 mx-auto">Четыре самостоятельных кейса с описанием задач, реализации, технологий и текущего статуса.</p>
     </div>
     <div class="row g-4">
       {% for case in cases %}
-      <div class="col-md-6 col-lg-4">
+      <div class="col-md-6 col-lg-3">
         <article class="card case-card h-100 border-0 shadow-sm hover-lift">
           <img src="{{ url_for('static', filename='images/' + case.image) }}" class="card-img-top case-img" alt="{{ case.title }}">
           <div class="card-body d-flex flex-column">
             <h3 class="h5 card-title">{{ case.title }}</h3>
             <p class="card-text text-secondary flex-grow-1">{{ case.short }}</p>
+            <span class="badge text-bg-light border align-self-start mb-3">{{ case.status }}</span>
             <a href="{{ url_for('main.case_detail', slug=case.slug) }}" class="btn btn-outline-primary align-self-start">Подробнее</a>
           </div>
         </article>
       </div>
       {% endfor %}
-    </div>
-    <div class="text-center mt-5">
-      <a href="{{ url_for('main.cases_list') }}" class="btn btn-primary btn-lg hover-lift">Все кейсы</a>
     </div>
   </div>
 </section>

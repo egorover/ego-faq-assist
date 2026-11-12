@@ -95,13 +95,13 @@ def create_app(settings: Settings | None = None, rag: RAGService | None = None) 
         try:
             answer, retrieved = service.answer(body.message, history, body.top_k)
         except AuthenticationError as exc:
-            raise HTTPException(status_code=502, detail="LLM provider authentication failed.") from exc
+            raise HTTPException(status_code=502, detail="AI provider authentication failed.") from exc
         except RateLimitError as exc:
-            raise HTTPException(status_code=503, detail="LLM provider rate limit reached; retry later.") from exc
+            raise HTTPException(status_code=503, detail="AI provider rate limit reached; retry later.") from exc
         except (APITimeoutError, APIConnectionError) as exc:
-            raise HTTPException(status_code=502, detail="Unable to reach the configured LLM provider.") from exc
+            raise HTTPException(status_code=502, detail="Unable to reach the configured AI provider.") from exc
         except APIStatusError as exc:
-            raise HTTPException(status_code=502, detail="The configured LLM provider returned an error.") from exc
+            raise HTTPException(status_code=502, detail="The configured AI provider returned an error.") from exc
         except (ValueError, RuntimeError) as exc:
             raise HTTPException(status_code=502, detail="Unable to process the assistant request.") from exc
 

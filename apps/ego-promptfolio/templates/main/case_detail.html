@@ -3,29 +3,33 @@
 {% block content %}
 <section class="page-header py-4 bg-light">
   <div class="container animate-fade-in">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb mb-2">
-        <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Главная</a></li>
-        <li class="breadcrumb-item"><a href="{{ url_for('main.cases_list') }}">Кейсы</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{ case.title }}</li>
-      </ol>
-    </nav>
+    <nav aria-label="breadcrumb"><ol class="breadcrumb mb-2">
+      <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Главная</a></li>
+      <li class="breadcrumb-item"><a href="{{ url_for('main.cases_list') }}">Проекты</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ case.title }}</li>
+    </ol></nav>
     <h1 class="fw-bold">{{ case.title }}</h1>
-    <p class="text-secondary mb-0">{{ case.short }}</p>
+    <p class="text-secondary mb-2">{{ case.short }}</p>
+    <span class="badge text-bg-light border">{{ case.status }}</span>
   </div>
 </section>
-<section class="py-5">
-  <div class="container">
-    <div class="row g-4 align-items-start">
-      <div class="col-lg-5">
-        <img src="{{ url_for('static', filename='images/' + case.image) }}" class="img-fluid rounded shadow case-detail-img" alt="{{ case.title }}">
+<section class="py-5"><div class="container"><div class="row g-4 align-items-start">
+  <div class="col-lg-4">
+    <img src="{{ url_for('static', filename='images/' + case.image) }}" class="img-fluid rounded shadow case-detail-img" alt="{{ case.title }}">
+    <div class="card border-0 shadow-sm mt-4"><div class="card-body">
+      <h2 class="h5">Технологии</h2>
+      <div class="d-flex flex-wrap gap-2">
+        {% for technology in case.technologies %}<span class="badge text-bg-light border">{{ technology }}</span>{% endfor %}
       </div>
-      <div class="col-lg-7 case-body animate-fade-in">
-        {{ case.body | safe }}
-        <a href="{{ url_for('main.cases_list') }}" class="btn btn-outline-secondary mt-4">← Назад к кейсам</a>
-        <a href="{{ url_for('main.contact') }}" class="btn btn-primary mt-4 ms-2">Обсудить проект</a>
-      </div>
-    </div>
+      {% if case.links %}<hr><h2 class="h5">Ссылки</h2><div class="d-grid gap-2">
+        {% for link in case.links %}<a class="btn btn-outline-primary" href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.label }}</a>{% endfor %}
+      </div>{% endif %}
+    </div></div>
   </div>
-</section>
+  <div class="col-lg-8 case-body animate-fade-in">
+    {{ case.body | safe }}
+    <a href="{{ url_for('main.cases_list') }}" class="btn btn-outline-secondary mt-4">← Все проекты</a>
+    <a href="{{ url_for('main.contact') }}" class="btn btn-primary mt-4 ms-2">Связаться</a>
+  </div>
+</div></div></section>
 {% endblock %}

@@ -10,27 +10,29 @@ from forms.contact_form import ContactForm
 from models.contact import ContactSubmission
 
 logger = logging.getLogger(__name__)
-
 main_bp = Blueprint("main", __name__)
+
+
+@main_bp.get("/health")
+def health():
+    """Проверка доступности для платформы размещения."""
+    return {"status": "ok"}
 
 
 @main_bp.route("/")
 def index():
-    """Главная страница с hero и превью кейсов."""
     cases = get_all_cases()
     return render_template("main/index.html", cases=cases)
 
 
 @main_bp.route("/cases")
 def cases_list():
-    """Список всех кейсов."""
     cases = get_all_cases()
     return render_template("main/cases.html", cases=cases)
 
 
 @main_bp.route("/cases/<slug>")
 def case_detail(slug):
-    """Детальная страница кейса."""
     case = get_case_by_slug(slug)
     if case is None:
         abort(404)
@@ -39,15 +41,11 @@ def case_detail(slug):
 
 @main_bp.route("/faq")
 def faq():
-    """Страница FAQ-ассистента."""
-    return render_template(
-        "main/faq.html", faq_api_url=current_app.config["FAQ_API_URL"]
-    )
+    return render_template("main/faq.html", faq_api_url=current_app.config["FAQ_API_URL"])
 
 
 @main_bp.route("/contact", methods=["GET", "POST"])
 def contact():
-    """Форма обратной связи."""
     form = ContactForm()
     if form.validate_on_submit():
         submission = ContactSubmission(
